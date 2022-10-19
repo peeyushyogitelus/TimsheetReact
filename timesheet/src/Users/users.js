@@ -1,1 +1,5 @@
-import React from 'react'
+import { Component } from 'react'
+class Users extends Component{
+
+}
+export  {Users}
