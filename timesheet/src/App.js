@@ -1,15 +1,11 @@
 import './App.css';
 import {Layout} from './Layout/layout'
 import {DateChange} from './DateChange/datechange'
-import {Users} from './Users/users';
 import {Timesheet} from './Timesheet/timesheet'
 
 function App() {
   return (
-    <div className="App">
-      <Layout />
-      <DateChange />
-      <Users />
+    <div>
       <Timesheet />
     </div>
   );
