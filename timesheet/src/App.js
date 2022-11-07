@@ -1,13 +1,21 @@
 import './App.css';
-import './www/css/style_generic.css';
-import {Layout} from './Layout/layout'
-import {DateChange} from './DateChange/datechange'
-import {Timesheet} from './Timesheet/timesheet'
+import { Route, Switch } from 'react-router-dom';
+import AuthProvider from './AuthContext/Authenticate';
+import AuthContext from './AuthContext/AuthDetails';
+
 
 function App() {
   return (
     <div>
-      <Timesheet />
+      <AuthContext.Provider value="{}" >
+        <Switch>
+          <Route path="/">
+            <AuthProvider />
+          </Route>
+        </Switch>
+      </AuthContext.Provider>
+
+
     </div>
   );
 }

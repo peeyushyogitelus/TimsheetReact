@@ -24,7 +24,7 @@ const Timesheet = () => {
     
     </tbody>
   </table>
-  <a href="#">Click here to add new row</a>
+  
   <button>Exit</button>
     </div>
   );

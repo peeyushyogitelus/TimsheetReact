@@ -7,13 +7,18 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.2",
+    "nodemon": "^2.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "proxy": "nodemon ./server.js localhost 8010",
+    "start": "set PORT=9001 && react-scripts start",
+    "json-server": "json-server --watch db.json --port 3020",
+    "start:dev": "concurrently \"npm start\" \"npm run json-server\" \"npm run proxy\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,5 +40,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "APIConfirguration": {
+    "baseUrl": "http://localhost:3000",
+    "appId": "c3effd9ae1762550cef47dc7f03fa01ffd1ab20015a69fbe2b63cac94d74bf04",
+    "appSecret": "5c77fb504660da8094bbfa5b6b8fc40b4ff2510886e4f552d5b6ac6157ad9d87",
+    "authCallbackUrl": "http://localhost:3000",
+    "embeddedauthCallbackUrl": "http://localhost:3000"
+  },
+  "AppKeys": {
+    "MaintenanceMode": "false",
+    "PlannedOutageMode": "false",
+    "PlannedOutageInfo": "We have a scheduled maintenance on Thursday, September 24th from 1pm to 2pm(PST).",
+    "AllowedOutageIPs": "",
+    "DestinationServerUrl": "",
+    "DBConfig": "Data Source=.\\SQLEXPRESS;Initial Catalog=Xav_DMT; User ID=peeyushyogi; Password=Welcome@123",
+    "DBUIHashedPassword": "",
+    "DBUISalt": ""
   }
 }
