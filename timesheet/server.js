@@ -32,7 +32,7 @@ MavenFlow: https://mavenflowapi.azurewebsites.net/api/flow_multiple?context=appr
 /* base Standard API URL */
 const baseurl = "https://api.mavenlink.com/api/v1";
 const apiHeaders = {
-  'Authorization': 'Bearer d1eff0dade70bcf1c358829a2f07f1fa2f091d9ad95f5d2e9d78a5bd58e3a8ee' 
+  'Authorization': 'Bearer '+localStorage.getItem('AccessToken') 
 };
 
 /* base Mavenflow API URL */

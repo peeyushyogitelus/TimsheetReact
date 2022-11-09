@@ -12,11 +12,12 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
+    "request": "^2.88.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "proxy": "nodemon ./server.js localhost 8010",
-    "start": "set PORT=9001 && react-scripts start",
+    "start": "set PORT=3000 && react-scripts start",
     "json-server": "json-server --watch db.json --port 3020",
     "start:dev": "concurrently \"npm start\" \"npm run json-server\" \"npm run proxy\"",
     "build": "react-scripts build",
@@ -47,6 +48,11 @@
     "appSecret": "5c77fb504660da8094bbfa5b6b8fc40b4ff2510886e4f552d5b6ac6157ad9d87",
     "authCallbackUrl": "http://localhost:3000",
     "embeddedauthCallbackUrl": "http://localhost:3000"
+  },
+  "Urls":{
+    "proxyurl_local":"http://localhost:8010/",
+    "proxyurl_third":"https://cors-anywhere.herokuapp.com/",
+    "proxyurl_in_use":"https://cors-anywhere.herokuapp.com/"
   },
   "AppKeys": {
     "MaintenanceMode": "false",
