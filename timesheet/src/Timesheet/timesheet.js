@@ -106,8 +106,7 @@ const Timesheet = () => {
 
   return (
     <div>
-<<<<<<< HEAD
-      <h2>Start Date:2022-10-16</h2>
+ <h2>Start Date:2022-10-16</h2>
       <h2>End Date:2022-10-22</h2>
       <table className='table table-striped table-bordered' >
         <Thead startDate="2022-10-16" />
@@ -228,50 +227,11 @@ const Timesheet = () => {
       </table>
       <div id='row'></div>
       <button onClick={handleRowAdd}>Click here to add new row</button>
-=======
-      <table>
-        <thead>
-          <tr>
-            <td>Id</td>
-            <td>Project</td>
-            <td>Task</td>
-            <td>Sun</td>
-            <td>Mon</td>
-            <td>Tue</td>
-            <td>Wed</td>
-            <td>Thurs</td>
-            <td>Fri</td>
-            <td>Sat</td>
-            <td>Del</td>
-            <td>Edit</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-          <td>1</td>
-            <td>Project1</td>
-            <td>Task1</td>
-            <td>0</td>
-            <td>4</td>
-            <td>3</td>
-            <td>5</td>
-            <td>3</td>
-            <td>2</td>
-            <td>0</td>
-            <td><button>Delete</button></td>
-            <td><button>Edit</button></td>
-          </tr>
-        </tbody>
-      </table>
 
->>>>>>> 120a7efa90b347b51270d21b8f2413a770d3bad3
       <button>Exit</button>
     </div>
   );
 }
 
-<<<<<<< HEAD
-export { Timesheet };
-=======
 export default Timesheet;
->>>>>>> 120a7efa90b347b51270d21b8f2413a770d3bad3
+
