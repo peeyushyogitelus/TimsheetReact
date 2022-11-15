@@ -13,6 +13,7 @@
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
     "request": "^2.88.2",
+    "serve": "^14.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -42,6 +43,7 @@
       "last 1 safari version"
     ]
   },
+  
   "APIConfirguration": {
     "baseUrl": "http://localhost:3000",
     "appId": "c3effd9ae1762550cef47dc7f03fa01ffd1ab20015a69fbe2b63cac94d74bf04",
@@ -49,10 +51,14 @@
     "authCallbackUrl": "http://localhost:3000",
     "embeddedauthCallbackUrl": "http://localhost:3000"
   },
-  "Urls":{
-    "proxyurl_local":"http://localhost:8010/",
-    "proxyurl_third":"https://cors-anywhere.herokuapp.com/",
-    "proxyurl_in_use":"https://cors-anywhere.herokuapp.com/"
+  "Urls": {
+    "SiteUrl":"",
+    "ApiUrl":"https://api.mavenlink.com/api",
+    "ApiVersion":"v1",
+    "proxyurl_local": "http://localhost:8010/",
+    "proxyurl_third": "https://cors-anywhere.herokuapp.com/",
+    "proxyurl_in_use": "https://cors-anywhere.herokuapp.com/",
+    "is_proxy_in_use": true
   },
   "AppKeys": {
     "MaintenanceMode": "false",

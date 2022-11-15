@@ -1,17 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
-const Home = () =>{
-    <div>
+const Home = (props) =>{
+    return (<div>
         <div className="row">
-            <div className="col-lg-3">Time Sheet</div>
-            <div className="col-lg-3">PM Dashboard</div>
-            <div className="col-lg-3">Genpact</div>
-            <div className="col-lg-3">Estimate Form</div>
-            <div className="col-lg-3">Ana</div>
-            <div className="col-lg-3">Valtech</div>
+         <div className="col-lg-2"><Link to="/timesheet">Time Sheet</Link></div>
+            
         </div>
-    </div>
+    </div> )
 
 }
 export default Home;

@@ -1,12 +1,12 @@
 import React from 'react';
 
 const AuthContext = React.createContext({
-    isLoggedIn: false,
     accessToken : "",
     userName:"",
     userEmail:"",
     userAccountId:"",
     userId:"",
-    adminToken:""
+    adminToken:"",
+    userAccountPermission:"NRC"
 });
 export default AuthContext;

@@ -1,7 +1,9 @@
 import React, { Component, useContext } from 'react';
 import '../www/css/style_generic.css';
+import AuthContext from '../AuthContext/AuthDetails';
 
 const Layout = (props) => {
+    const contextData = useContext(AuthContext);
     return (
         <div className="col-md-12" id="main">
             <div className="row">
@@ -21,15 +23,15 @@ const Layout = (props) => {
                         <span id="sidebarCollapse" title="Toggle Left Menu"
                             >&#9776;</span>
                         <span>Powered by Mavenlink Forms</span>
-                        <a className="formnavusername" title="Click for user detail information." data-toggle="collapse" href="#userdetailscollapsediv" role="button" aria-expanded="false" aria-controls="userdetailscollapsediv"><i className="fa fa-user" aria-hidden="true"></i> &nbsp;{props.email}</a>
+                        <a className="formnavusername" title="Click for user detail information." data-toggle="collapse" href="#userdetailscollapsediv" role="button" aria-expanded="false" aria-controls="userdetailscollapsediv"><i className="fa fa-user" aria-hidden="true"></i> &nbsp;{contextData.userEmail}</a>
                         <div className="row">
                             <div className="collapse" id="userdetailscollapsediv">
                                 <div className="greybox">
-                                    <p><b>Username :</b> <span>{props.username}</span></p>
-                                    <p><b>Email :</b> <span>{props.email}</span></p>
-                                    <p><b>User ID :</b> <span>{props.user_id}</span></p>
-                                    <p><b>Account ID :</b> <span>{props.account_id}</span></p>
-                                    <p><b>Account Permissions :</b> <span>{props.account_permission}</span></p> <hr />
+                                    <p><b>Username :</b> <span>{contextData.userName}</span></p>
+                                    <p><b>Email :</b> <span>{contextData.userEmail}</span></p>
+                                    <p><b>User ID :</b> <span>{contextData.userId}</span></p>
+                                    <p><b>Account ID :</b> <span>{contextData.userAccountId}</span></p>
+                                    <p><b>Account Permissions :</b> <span>{contextData.userAccountPermission}</span></p> <hr />
                                     <a id="lblUserName" title="Refresh Session" data-toggle="tooltip"> Refresh Session</a>
                                 </div>
                             </div>

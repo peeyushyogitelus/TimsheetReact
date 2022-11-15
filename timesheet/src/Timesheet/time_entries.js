@@ -1,17 +1,11 @@
-import React, { UseEffect, UseState } from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react';
 
-function time_entries() {
-    
 
-    UseEffect(() => {
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-       
-      }, [])
-      return(
+const  TimeEntries =()=> {
+  return(
     <tr>
         
     </tr>)
 }
 
-export default time_entries
+export default TimeEntries;

@@ -1,11 +1,12 @@
-import React from "react";
 import AppSetting from '../../package.json';
-import { useState, useContext } from "react";
-import Layout from "../Layout/layout";
-import { useEffect } from "react";
-import HomeComponent from '../Pages/Home';
-import TimesheetComponent from '../Timesheet/timesheet';
+import React, { useState, useEffect, Fragment } from "react";
 import { Route, Switch } from 'react-router-dom';
+import AuthContext from './AuthDetails';
+import Layout from "../Layout/layout";
+import HomeComponent from '../Pages/Home';
+import LoginComponent from '../Pages/Login';
+import TimesheetComponent from '../Timesheet/timesheet'
+
 
 
 const AuthProvider = (props) => {
@@ -16,26 +17,43 @@ const AuthProvider = (props) => {
         "userEmail": "",
         "userAccountId": "",
         "userId": "",
-        "isPunchClock":"",
-        "accountPermission":"",
-        "bearerToken":""
+        "isPunchClock": "",
+        "accountPermission": "",
+        "bearerToken": ""
     });
+    let isUserLoggedIn = false;
+    let isBearerTokenGen = false;
+    let isLoginButtonVisible = true;
     useEffect(() => {
         /** Set Local Storage Information **/
-        localStorage.setItem("user_name", isLoggedIn.userName);
-        localStorage.setItem("user_email", isLoggedIn.userEmail);
-        localStorage.setItem("user_account_id", isLoggedIn.userAccountId);
-        localStorage.setItem("user_id", isLoggedIn.userId);
-        localStorage.setItem("account_permission",isLoggedIn.accountPermission);
+        if (isLoggedIn.userId != "") {
+            localStorage.setItem("user_name", isLoggedIn.userName);
+            localStorage.setItem("user_email", isLoggedIn.userEmail);
+            localStorage.setItem("user_account_id", isLoggedIn.userAccountId);
+            localStorage.setItem("user_id", isLoggedIn.userId);
+            localStorage.setItem("account_permission", isLoggedIn.accountPermission);
+        }
         /**end**/
     }, [isLoggedIn]);
 
+    const MLUserId = localStorage.getItem("user_id");
+    let BearerToken = localStorage.getItem("AccessToken");
+    const proxyurl = AppSetting.Urls.proxyurl_in_use;
+
+    if (MLUserId != "" && MLUserId != undefined && MLUserId != null) {
+        isUserLoggedIn = true;
+        isLoginButtonVisible = false;
+    }
+    if (BearerToken != "" && BearerToken != null && BearerToken != undefined) {
+        isBearerTokenGen = true;
+        isLoginButtonVisible = false;
+    }
+
     useEffect(() => {
-        const MLUserId = localStorage.getItem("user_id");
-        if (MLUserId == undefined || MLUserId == "") {
+        if (isUserLoggedIn == false && isBearerTokenGen == false) {
             if (code && code !== "" && code != null) {
-                const proxyurl = AppSetting.Urls.proxyurl_in_use;
-                let tokenUrl = proxyurl + "https://app.mavenlink.com/";
+                isLoginButtonVisible = false;
+                let tokenUrl =  proxyurl+"https://app.mavenlink.com/";
                 tokenUrl += `oauth/token?`;
                 tokenUrl += `client_id=${AppSetting.APIConfirguration.appId}`;
                 tokenUrl += `&client_secret=${AppSetting.APIConfirguration.appSecret}`;
@@ -51,8 +69,11 @@ const AuthProvider = (props) => {
                     if (response.ok) {
                         response.json().then(
                             (result) => {
+
                                 if (result.access_token !== undefined && result.access_token !== "") {
                                     localStorage.setItem("AccessToken", result.access_token);
+                                    isBearerTokenGen = true;
+                                    BearerToken = result.access_token;
                                     GetUserInformation(result.access_token);
                                 }
                             }
@@ -67,54 +88,54 @@ const AuthProvider = (props) => {
                         )
                     }
                 });
-                function GetUserInformation(access_token) {
-                    const userInformationUrl = proxyurl + "https://api.mavenlink.com/api/v1/users/me.json";
-                    fetch(userInformationUrl, {
-                        method: "GET",
-                        headers: {
-                            "Authorization": "Bearer " + access_token
-                        }
-                    }).then((response) => {
-                        console.clear();
-                        console.log(response);
-                        if (response.ok) {
-                            response.json().then(
-                                (result) => {
-
-                                    if (result.count > 0) {
-                                        let lstUsers = result.users;
-                                        let lstUserDetails = Object.keys(lstUsers).map((key) => lstUsers[key]);
-                                        console.log(lstUserDetails);
-                                        setLoggedState({
-                                            userName: lstUserDetails[0]['full_name'],
-                                            userEmail: lstUserDetails[0]['email_address'],
-                                            userAccountId: lstUserDetails[0]['account_id'],
-                                            userId: lstUserDetails[0]['id'],
-                                            accountPermisson: lstUserDetails[0]['account_permission'],
-                                            isPunchClock: lstUserDetails[0]['is_punch_clock_user']
-                                        });
-                                    }
-
-
-                                }
-                            )
-                        }
-                    })
-                }
-
+            } else {
+                console.error("Error..!", "User is not logged In and code is also not generated");
             }
-        }else{
+        }
+        else if (isUserLoggedIn == false && isBearerTokenGen == true) {
+            GetUserInformation(BearerToken);
+        }
+        else if (isUserLoggedIn == true && isBearerTokenGen == true) {
             setLoggedState({
                 userName: localStorage.getItem('user_name'),
                 userEmail: localStorage.getItem('user_email'),
                 userAccountId: localStorage.getItem('user_account_id'),
                 userId: localStorage.getItem('user_id'),
-                accountPermisson: localStorage.getItem('account_permission')
+                accountPermisson: localStorage.getItem('account_permission'),
+                accessToken:localStorage.getItem("AccessToken")
             });
         }
-    },[]);
+    }, []);
 
-
+    function GetUserInformation(access_token) {
+       const userInformationUrl = proxyurl+"https://api.mavenlink.com/api/v1/users/me.json";
+        fetch(userInformationUrl, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + access_token
+            }
+        }).then((response) => {
+            if (response.ok) {
+                response.json().then(
+                    (result) => {
+                        if (result.count > 0) {
+                            let lstUsers = result.users;
+                            let lstUserDetails = Object.keys(lstUsers).map((key) => lstUsers[key]);
+                            setLoggedState({
+                                userName: lstUserDetails[0]['full_name'],
+                                userEmail: lstUserDetails[0]['email_address'],
+                                userAccountId: lstUserDetails[0]['account_id'],
+                                userId: lstUserDetails[0]['id'],
+                                accountPermisson: lstUserDetails[0]['account_permission'],
+                                isPunchClock: lstUserDetails[0]['is_punch_clock_user'],
+                                accessToken:access_token
+                            });
+                        }
+                    }
+                )
+            }
+        })
+    }
 
     function GetAuthCode() {
         const url = `https://app.mavenlink.com/oauth/authorize?response_type=code&client_id=${AppSetting.APIConfirguration.appId}&redirect_uri=${AppSetting.APIConfirguration.authCallbackUrl}`;
@@ -122,15 +143,31 @@ const AuthProvider = (props) => {
     }
     return (
         <div>
-            {
-                code?"":<button onClick={GetAuthCode}>Let me Log In</button>
-            }   
-            <Layout email={isLoggedIn.userEmail} username={isLoggedIn.userName} user_id={isLoggedIn.userId} account_id={isLoggedIn.userAccountId} account_permission={isLoggedIn.accountPermission} />
-            <Switch>
-                <Route path="/Home" component={HomeComponent} />
-                <Route path="/timesheet" component={TimesheetComponent} />
-                <Route path="/PMDashboard" />
-            </Switch>
+            <AuthContext.Provider value={{
+                userName: isLoggedIn.userName,
+                userEmail: isLoggedIn.userEmail,
+                userAccountId: isLoggedIn.userAccountId,
+                userId: isLoggedIn.userId,
+                accessToken:isLoggedIn.accessToken
+            }} >
+                {
+                    isLoggedIn.userId?
+                    <Fragment>
+                        <Layout />
+                        <Switch>
+                            <Route path="/" exact component={HomeComponent} />
+                            <Route path="/timesheet" component={TimesheetComponent} />
+                        </Switch>
+                    </Fragment>
+                    :
+                    <Fragment>
+                        <button onClick={GetAuthCode}>Sign In</button>
+                        <LoginComponent />
+                    </Fragment> 
+                    
+                }
+            </AuthContext.Provider>
+            
         </div>
     )
 }
