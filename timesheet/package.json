@@ -45,11 +45,11 @@
   },
   
   "APIConfirguration": {
-    "baseUrl": "http://localhost:3000",
-    "appId": "c3effd9ae1762550cef47dc7f03fa01ffd1ab20015a69fbe2b63cac94d74bf04",
-    "appSecret": "5c77fb504660da8094bbfa5b6b8fc40b4ff2510886e4f552d5b6ac6157ad9d87",
-    "authCallbackUrl": "http://localhost:3000",
-    "embeddedauthCallbackUrl": "http://localhost:3000"
+    "baseUrl": "https://urchin-app-pg7dp.ondigitalocean.app/",
+    "appId": "2a1b1a3eb4ddadc0e2c644666c50412b6116085cd3ef75aabd8b6e590b45cf97",
+    "appSecret": "b294d40f7016f047c93734afa70f19149f7fe48fe6938c7ad124b1b6676010b8",
+    "authCallbackUrl": "https://urchin-app-pg7dp.ondigitalocean.app/",
+    "embeddedauthCallbackUrl": "https://urchin-app-pg7dp.ondigitalocean.app/"
   },
   "Urls": {
     "SiteUrl":"",
