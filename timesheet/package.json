@@ -57,7 +57,7 @@
     "ApiVersion":"v1",
     "proxyurl_local": "http://localhost:8010/",
     "proxyurl_third": "https://cors-anywhere.herokuapp.com/",
-    "proxyurl_in_use": "https://cors-anywhere.herokuapp.com/",
+    "proxyurl_in_use": "",
     "is_proxy_in_use": true
   },
   "AppKeys": {

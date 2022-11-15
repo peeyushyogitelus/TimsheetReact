@@ -27,8 +27,8 @@ const Timesheet = () => {
   const [selected, setSelected] = useState("");
   const [taskId, setTaskId] = useState("");
   const [curDdlId, setcurDdlId] = useState("");
-  const proxyurl = "https://cors-anywhere.herokuapp.com";
-  const processurl = proxyurl+"/" + AppSetting.Urls.ApiUrl + "/" + AppSetting.Urls.ApiVersion+"/";
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const processurl = AppSetting.Urls.ApiUrl + "/" + AppSetting.Urls.ApiVersion+"/";
   
   const userId = contextData.userId;
   const bearerToken = contextData.accessToken;
